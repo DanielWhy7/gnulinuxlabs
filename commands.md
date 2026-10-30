@@ -1,18 +1,37 @@
-## Task one
-wc -w < dictionary_2026.txt
-cat dictionary_2026.txt | wc -w
-wc -w dictionary_2026.txt | grep -Eo "^[0-9]+"
+# Task 1
+git init
 
-## Task two
-    -   grep -E "[cC]{2}" dictionary_2026.txt | wc -w
-grep -E "[cC].+[cC]" dictionary_2026.txt | wc -w
-grep -oE '\S+' dictionary_2026.txt | grep -iE "^([^c]*c){2}[^c]*$" | wc -l
+echo "A square on a branch" > text.txt
 
-## Task three
-grep -E "t.t" dictionary_2026.txt | wc -w
-grep -E "^[^t]*t[^t]+t[^t]*$" dictionary_2026.txt | wc -w
-grep -oE '\S+' dictionary_2026.txt | grep -E '^[^t]*t[^t]+t[^t]*$' | wc -l
+git add text.txt; git commit -m "upload text.txt"
 
-## Task four
-grep -oE '\S+' dictionary_2026.txt | grep -oE "^\S{3}" | grep -v "oo" | sort | uniq -c | sort -rn | head -n 4
-grep -oE '\S+' dictionary_2026.txt | grep -oE "^\S{3}" | grep -v "oo" | sort | uniq -c | sort -rn | head -n 4 | grep -oE "[a-zA-Z]+"
+echo "A square enjoys a life" >> text.txt
+
+git add text.txt; git commit -m "update text.txt"
+
+git log
+
+git checkout
+
+git diff main HEAD
+
+git switch main
+
+# Task 2
+git switch -c feature
+
+echo "\n\nAn epic square >> right there totally there" >> text.txt
+
+git add text.txt
+
+git commit -m "The square become even better"
+
+git switch main
+
+echo "\n\n\n\n Wow What a square?? => <== Meaw" >> text.txt
+
+git add text.txt
+
+git commit -m "new square??"
+
+git merge dev -X theirs
