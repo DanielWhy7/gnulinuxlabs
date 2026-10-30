@@ -1,37 +1,60 @@
 # Task 1
-git init
+set
 
-echo "A square on a branch" > text.txt
 
-git add text.txt; git commit -m "upload text.txt"
+MY_LOCAL_VAR="local_var_value"
+echo $MY_LOCAL_VAR
 
-echo "A square enjoys a life" >> text.txt
 
-git add text.txt; git commit -m "update text.txt"
+echo 'export MY_SHELL_VAR="shell_var_value"' >> ~/.bashrc
+source ~/.bashrc
+echo $MY_SHELL_VAR
 
-git log
 
-git checkout
+sudo sh -c 'echo "MY_GLOBAL_VAR=\"global_var_value\"" >> /etc/environment'
+source /etc/environment
+echo $MY_GLOBAL_VAR
+python3 -c 'import os; print(os.getenv("MY_GLOBAL_VAR"))'
 
-git diff main HEAD
 
-git switch main
 
 # Task 2
-git switch -c feature
+groups
 
-echo "\n\nAn epic square >> right there totally there" >> text.txt
+sudo gpasswd new_group
+mkdir ~/my_project && cd ~/my_project
+echo "Hello World" > test_file.txt
 
-git add text.txt
+chmod o-rwx test_file.txt
+sudo chown root:new_group test_file.txt
+ls -l test_file.txt
 
-git commit -m "The square become even better"
+echo "New data" >> test_file.txt
+sudo usermod -aG new_group $USER
+newgrp new_group
+echo "User currently in the group" >> test_file.txt
 
-git switch main
 
-echo "\n\n\n\n Wow What a square?? => <== Meaw" >> text.txt
+# Task 3
+sudo ln -s $(pwd)/test_file.txt /usr/local/bin/tf
+sudo chmod -h go-rwx /usr/local/bin/tf
+sudo chown -h root:root /usr/local/bin/tf
 
-git add text.txt
+alias ll="ls -l"
+ll
 
-git commit -m "new square??"
+echo 'alias ll="ls -l"' >> ~/.bashrc
+source ~/.bashrc
 
-git merge dev -X theirs
+# Task 4
+jobs
+ps
+cat
+fg %1
+
+tmux new-session -d -s session1 'cat'
+tmux new-session -d -s session2 'echo "the second session"; read'
+tmux attach-target -t session1
+tmux kill-session -t session1
+exit
+tmux attach-target -t session2
